@@ -1,1 +1,5 @@
-var ToDo = Backbone.Model.extend();
+var ToDo = Backbone.Model.extend({
+  defaults: {
+    'priority': 3
+  }
+});
