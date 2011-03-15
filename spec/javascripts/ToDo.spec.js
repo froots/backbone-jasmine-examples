@@ -1,9 +1,9 @@
-describe('ToDo model', function() {
+describe('Todo model', function() {
   
   describe('when instantiated', function() {
     
     beforeEach(function() {
-      this.todo = new ToDo({
+      this.todo = new Todo({
         title: 'Rake leaves',
         tags: ['garden', 'weekend']
       });

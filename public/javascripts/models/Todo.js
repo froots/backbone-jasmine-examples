@@ -1,4 +1,4 @@
-var ToDo = Backbone.Model.extend({
+var Todo = Backbone.Model.extend({
   defaults: {
     'priority': 3
   }
