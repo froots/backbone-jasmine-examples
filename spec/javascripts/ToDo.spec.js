@@ -5,6 +5,8 @@ describe('Todo model', function() {
       title: 'Rake leaves',
       tags: ['garden', 'weekend']
     });
+    this.Col = Backbone.Collection.extend({url: '/collection'});
+    this.collection = new this.Col([this.todo]);
   });
   
   describe('when instantiated', function() {
@@ -20,14 +22,13 @@ describe('Todo model', function() {
       expect(this.todo.get('priority')).toEqual(3);
     });
     
+    it('should set the done property to default value', function() {
+      expect(this.todo.get('done')).toEqual(false);
+    });
+    
   });
   
   describe('urls', function() {
-    
-    beforeEach(function() {
-      this.Col = Backbone.Collection.extend({url: '/collection'});
-      this.collection = new this.Col([this.todo]);
-    })
     
     it('should set the URL to the collection URL when no id is set', function() {
       expect(this.todo.url()).toEqual('/collection');
@@ -37,6 +38,19 @@ describe('Todo model', function() {
       this.todo.id = 1;
       expect(this.todo.url()).toEqual('/collection/1');
     })
+    
+  });
+  
+  describe('when saving', function() {
+    
+    it('should not save when title is undefined', function() {
+      var errorSpy = sinon.spy();
+      this.todo.bind('error', errorSpy);
+
+      this.todo.save({'title': ''});
+      
+      expect(errorSpy).toHaveBeenCalledWith(this.todo, "cannot have an empty title");
+    });
     
   });
   
