@@ -25,6 +25,10 @@ describe("Todos collection", function() {
       expect(this.todos.get(5)).toEqual(this.model);
     });
     
+    it("should find a model by index", function() {
+      expect(this.todos.at(0)).toEqual(this.model);
+    });
+    
   })
   
 });
