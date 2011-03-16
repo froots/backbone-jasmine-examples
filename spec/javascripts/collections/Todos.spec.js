@@ -29,6 +29,41 @@ describe("Todos collection", function() {
       expect(this.todos.at(0)).toEqual(this.model);
     });
     
-  })
+  });
+  
+  describe("When adding models", function() {
+    
+    beforeEach(function() {
+      this.todo1 = new Backbone.Model({
+        id: 1,
+        title: 'Todo 1',
+        priority: 3
+      });
+      this.todo2 = new Backbone.Model({
+        id: 2,
+        title: 'Todo 2',
+        priority: 2
+      });
+      this.todo3 = new Backbone.Model({
+        id: 3,
+        title: 'Todo 3',
+        priority: 1
+      });
+      this.todo4 = new Backbone.Model({
+        id: 4,
+        title: 'Todo 4',
+        priority: 2
+      });
+    });
+    
+    it("should order models by priority by default", function() {
+      this.todos.add([this.todo1, this.todo2, this.todo3, this.todo4]);
+      expect(this.todos.at(0)).toBe(this.todo3);
+      expect(this.todos.at(1)).toBe(this.todo4);
+      expect(this.todos.at(2)).toBe(this.todo2);
+      expect(this.todos.at(3)).toBe(this.todo1);
+    });
+    
+  });
   
 });
