@@ -43,13 +43,28 @@ describe('Todo model', function() {
   
   describe('when saving', function() {
     
+    beforeEach(function() {
+      this.server = sinon.fakeServer.create();
+    });
+    
+    afterEach(function() {
+      this.server.restore();
+    })
+    
     it('should not save when title is undefined', function() {
       var errorSpy = sinon.spy();
       this.todo.bind('error', errorSpy);
-
       this.todo.save({'title': ''});
-      
+      expect(errorSpy).toHaveBeenCalledOnce();    
       expect(errorSpy).toHaveBeenCalledWith(this.todo, "cannot have an empty title");
+      expect(this.server.requests.length).toEqual(0);
+    });
+    
+    it('should make a save request to the server', function() {
+      this.todo.save();
+      expect(this.server.requests[0].method).toEqual('POST');
+      expect(this.server.requests[0].url).toEqual('/collection');
+      expect(JSON.parse(this.server.requests[0].requestBody)).toEqual(this.todo.attributes);
     });
     
   });
