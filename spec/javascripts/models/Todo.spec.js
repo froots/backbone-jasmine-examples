@@ -60,7 +60,7 @@ describe("Todo model", function() {
     
     afterEach(function() {
       this.server.restore();
-    })
+    });
     
     it("should not save when title is undefined", function() {
       this.todo.bind("error", this.eventSpy);
