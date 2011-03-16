@@ -42,17 +42,15 @@ class TodosController < ApplicationController
   # POST /todos
   # POST /todos.xml
   def create
-    @todo = Todo.new(params[:todo])
+    params.delete :action
+    params.delete :controller
+    @todo = Todo.create! params
 
     respond_to do |format|
       if @todo.save
-        format.html { redirect_to(@todo, :notice => 'Todo was successfully created.') }
         format.json { render :json => @todo, :status => :created, :location => @todo }
-        format.xml  { render :xml => @todo, :status => :created, :location => @todo }
       else
-        format.html { render :action => "new" }
         format.json  { render :json => @todo.errors, :status => :unprocessable_entity }
-        format.xml  { render :xml => @todo.errors, :status => :unprocessable_entity }
       end
     end
   end
