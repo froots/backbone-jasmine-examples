@@ -1,6 +1,28 @@
 describe("Todos collection", function() {
   
   beforeEach(function() {
+    
+    this.todo1 = new Backbone.Model({
+      id: 1,
+      title: 'Todo 1',
+      priority: 3
+    });
+    this.todo2 = new Backbone.Model({
+      id: 2,
+      title: 'Todo 2',
+      priority: 2
+    });
+    this.todo3 = new Backbone.Model({
+      id: 3,
+      title: 'Todo 3',
+      priority: 1
+    });
+    this.todo4 = new Backbone.Model({
+      id: 4,
+      title: 'Todo 4',
+      priority: 2
+    });
+    
     this.todos = new Todos();
     this.todoStub = sinon.stub(window, 'Todo');
   });
@@ -32,29 +54,6 @@ describe("Todos collection", function() {
   });
   
   describe("When adding models", function() {
-    
-    beforeEach(function() {
-      this.todo1 = new Backbone.Model({
-        id: 1,
-        title: 'Todo 1',
-        priority: 3
-      });
-      this.todo2 = new Backbone.Model({
-        id: 2,
-        title: 'Todo 2',
-        priority: 2
-      });
-      this.todo3 = new Backbone.Model({
-        id: 3,
-        title: 'Todo 3',
-        priority: 1
-      });
-      this.todo4 = new Backbone.Model({
-        id: 4,
-        title: 'Todo 4',
-        priority: 2
-      });
-    });
     
     it("should order models by priority by default", function() {
       this.todos.add([this.todo1, this.todo2, this.todo3, this.todo4]);
@@ -98,6 +97,25 @@ describe("Todos collection", function() {
       while (len--) {
         expect(this.todos.at(len).get('list')).toEqual(this.fixture.response.list);
       }
+    });
+    
+  });
+  
+  describe("Custom finds", function() {
+    
+    beforeEach(function() {
+      this.todos.add([this.todo1, this.todo2, this.todo3, this.todo4]);
+    });
+    
+    describe("by priority", function() {
+      
+      it("should return only todos with the priority specified", function() {
+        var priority1 = this.todos.findByPriority(2);
+        expect(priority1.length).toEqual(2);
+        expect(priority1[0].get('priority')).toEqual(2);
+        expect(priority1[1].get('priority')).toEqual(2);
+      });
+      
     });
     
   });
