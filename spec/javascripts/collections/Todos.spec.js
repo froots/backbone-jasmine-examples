@@ -70,6 +70,7 @@ describe("Todos collection", function() {
     
     beforeEach(function() {
       this.fixture = this.fixtures.Todos.valid;
+      this.fixtureTodos = this.fixture.response.todos;
       this.server = sinon.fakeServer.create();
       this.server.respondWith(
         "GET",
@@ -88,6 +89,15 @@ describe("Todos collection", function() {
       this.server.respond();
       expect(this.todos.length).toEqual(this.fixture.response.todos.length);
       expect(this.todos.get(1).get('title')).toEqual(this.fixture.response.todos[0].title)
+    });
+    
+    it("should inject the list name for each todo", function() {
+      this.todos.fetch();
+      this.server.respond();
+      var len = this.fixtureTodos.length;
+      while (len--) {
+        expect(this.todos.at(len).get('list')).toEqual(this.fixture.response.list);
+      }
     });
     
   });
