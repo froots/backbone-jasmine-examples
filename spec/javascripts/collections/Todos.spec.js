@@ -83,10 +83,11 @@ describe("Todos collection", function() {
       this.server.restore();
     });
     
-    it("should parse the response correctly", function() {
+    it("should parse the todos from the response", function() {
       this.todos.fetch();
       this.server.respond();
       expect(this.todos.length).toEqual(this.fixture.response.todos.length);
+      expect(this.todos.get(1).get('title')).toEqual(this.fixture.response.todos[0].title)
     });
     
   });
