@@ -66,4 +66,29 @@ describe("Todos collection", function() {
     
   });
   
+  describe("when fetching collection from server", function() {
+    
+    beforeEach(function() {
+      this.fixture = this.fixtures.Todos.valid;
+      this.server = sinon.fakeServer.create();
+      this.server.respondWith(
+        "GET",
+        "/todos",
+        this.createValidResponse(this.fixture)
+      );
+      this.eventSpy = sinon.spy();
+    });
+    
+    afterEach(function() {
+      this.server.restore();
+    });
+    
+    it("should parse the response correctly", function() {
+      this.todos.fetch();
+      this.server.respond();
+      expect(this.todos.length).toEqual(this.fixture.response.todos.length);
+    });
+    
+  });
+  
 });

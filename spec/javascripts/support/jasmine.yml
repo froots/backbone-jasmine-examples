@@ -13,6 +13,7 @@
 src_files:
   - spec/javascripts/support/sinon-1.0.0.js
   - spec/javascripts/support/jasmine-sinon.js
+  - spec/javascripts/fixtures/*.fixture.js
   - public/javascripts/lib/jquery-1.5.1.min.js
   - public/javascripts/lib/underscore-min.js
   - public/javascripts/lib/backbone-min.js
