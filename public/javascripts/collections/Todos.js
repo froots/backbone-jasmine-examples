@@ -1,6 +1,7 @@
 var Todos = Backbone.Collection.extend({
   
   url: '/todos',
+  model: Todo,
   
   parse: function(response) {
     var todos = response.response.todos;

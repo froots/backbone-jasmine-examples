@@ -5,8 +5,10 @@ describe("Todo model", function() {
       title: "Rake leaves",
       tags: ["garden", "weekend"]
     });
-    this.Col = Backbone.Collection.extend({url: "/collection"});
-    this.collection = new this.Col([this.todo]);
+    var collection = {
+      url: "/collection"
+    };
+    this.todo.collection = collection;
   });
   
   describe("when instantiated", function() {
@@ -62,12 +64,12 @@ describe("Todo model", function() {
       this.server.restore();
     });
     
-    it("should not save when title is undefined", function() {
+    it("should not save when title is empty", function() {
       this.todo.bind("error", this.eventSpy);
       this.todo.save({"title": ""});
+      
       expect(this.eventSpy).toHaveBeenCalledOnce();    
       expect(this.eventSpy).toHaveBeenCalledWith(this.todo, "cannot have an empty title");
-      expect(this.server.requests.length).toEqual(0);
     });
     
     it("should make a save request to the server", function() {

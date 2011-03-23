@@ -34,9 +34,9 @@ describe("Todos collection", function() {
   describe("When instantiated with model literal", function() {
     
     beforeEach(function() {
-      this.model = new Backbone.Model({id: 5, title: 'Foo'})
+      this.model = new Backbone.Model({id: 5, title: "Foo"});
       this.todoStub.returns(this.model);
-      this.todos.add(this.model);
+      this.todos.add({id:5, title:"Foo"});
     });
     
     it("should have 1 Todo model", function() {
@@ -44,11 +44,11 @@ describe("Todos collection", function() {
     });
     
     it("should find a model by id", function() {
-      expect(this.todos.get(5)).toEqual(this.model);
+      expect(this.todos.get(5).get("id")).toEqual(this.model.get("id"));
     });
     
     it("should find a model by index", function() {
-      expect(this.todos.at(0)).toEqual(this.model);
+      expect(this.todos.at(0).get("id")).toEqual(this.model.get("id"));
     });
     
   });
