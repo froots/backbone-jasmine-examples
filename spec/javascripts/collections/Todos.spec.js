@@ -83,6 +83,13 @@ describe("Todos collection", function() {
       this.server.restore();
     });
     
+    it("should make the correct request", function() {
+      this.todos.fetch();
+      expect(this.server.requests.length).toEqual(1);
+      expect(this.server.requests[0].method).toEqual("GET");
+      expect(this.server.requests[0].url).toEqual("/todos");
+    });
+    
     it("should parse the todos from the response", function() {
       this.todos.fetch();
       this.server.respond();
