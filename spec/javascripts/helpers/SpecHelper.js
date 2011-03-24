@@ -1,6 +1,6 @@
 beforeEach(function() {
   
-  this.createValidResponse = function(responseText) {
+  this.validResponse = function(responseText) {
     return [
       200,
       {"Content-Type": "application/json"},

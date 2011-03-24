@@ -74,9 +74,8 @@ describe("Todos collection", function() {
       this.server.respondWith(
         "GET",
         "/todos",
-        this.createValidResponse(this.fixture)
+        this.validResponse(this.fixture)
       );
-      this.eventSpy = sinon.spy();
     });
     
     afterEach(function() {
