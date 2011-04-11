@@ -32,14 +32,18 @@ describe("Todo model", function() {
   
   describe("urls", function() {
     
-    it("should set the URL to the collection URL when no id is set", function() {
-      expect(this.todo.url()).toEqual("/collection");
+    describe("when no id is set", function() {
+      it("should return the collection URL", function() {
+        expect(this.todo.url()).toEqual("/collection");
+      });
     });
     
-    it("should set the URL to the collection URL plus the id when id is set", function() {
-      this.todo.id = 1;
-      expect(this.todo.url()).toEqual("/collection/1");
-    })
+    describe("when id is set", function() {
+      it("should return the collection URL and id", function() {
+        this.todo.id = 1;
+        expect(this.todo.url()).toEqual("/collection/1");
+      });
+    });
     
   });
   
