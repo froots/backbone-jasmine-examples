@@ -1,0 +1,1 @@
+var TodoDetailView = Backbone.View.extend();
