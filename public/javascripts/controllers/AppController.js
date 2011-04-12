@@ -1,9 +1,5 @@
 var AppController = Backbone.Controller.extend({
   
-  initialize: function() {
-    console.log(this);
-  },
-  
   routes: {
     "": "index",
     "todo/:id": "todo"

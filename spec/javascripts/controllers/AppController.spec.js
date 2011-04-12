@@ -20,16 +20,14 @@ describe("AppController", function() {
     window.Todos.restore();
     window.TodoDetailView.restore();
     window.Todo.restore();
-    window.location = "#null";
-  })
+  });
   
   describe("Home route", function() {
     
     describe("when no Todo list exists", function() {
       
       beforeEach(function() {
-        window.location = "#";
-        Backbone.history.loadUrl();
+        this.controller.index();
       });
       
       it("creates a Todo list collection", function() {
@@ -53,8 +51,7 @@ describe("AppController", function() {
     describe("when no detail view exists", function() {
       
       beforeEach(function() {
-        window.location = "#todo/1";
-        Backbone.history.loadUrl();
+        this.controller.todo("1");
       });
       
       it("creates a detailed todo view", function() {
