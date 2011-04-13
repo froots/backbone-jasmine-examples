@@ -1,5 +1,5 @@
 describe("AppController", function() {
-  
+    
   beforeEach(function() {
     this.controller = new AppController();
     this.collection = new Backbone.Collection();
@@ -12,7 +12,6 @@ describe("AppController", function() {
       .returns(new Backbone.View());
     this.todoStub = sinon.stub(window, "Todo")
       .returns(this.todo);
-    Backbone.history.start();
   });
   
   afterEach(function() {
@@ -22,7 +21,7 @@ describe("AppController", function() {
     window.Todo.restore();
   });
   
-  describe("Home route", function() {
+  describe("Index handler", function() {
     
     describe("when no Todo list exists", function() {
       
@@ -46,7 +45,7 @@ describe("AppController", function() {
     
   });
   
-  describe("View todo route", function() {
+  describe("Todo detail handler", function() {
     
     describe("when no detail view exists", function() {
       
