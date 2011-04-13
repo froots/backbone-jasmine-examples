@@ -1,10 +1,10 @@
 var controller = new AppController();
-Backbone.history.interval = 100;
 
 describe("AppControllerRoutes", function() {
   
   beforeEach(function() {
     this.routeSpy = sinon.spy();
+    this.controller = new AppController();
   });
   
   afterEach(function() {
@@ -15,7 +15,7 @@ describe("AppControllerRoutes", function() {
     controller.bind("route:index", this.routeSpy);
     window.location.hash = "";
     Backbone.history.start();
-    expect(this.routeSpy).toHaveBeenCalled();
+    expect(this.routeSpy).toHaveBeenCalledOnce();
     expect(this.routeSpy).toHaveBeenCalledWith();
     controller.unbind("route:index");
   });
@@ -24,7 +24,8 @@ describe("AppControllerRoutes", function() {
     controller.bind("route:todo", this.routeSpy);
     window.location.hash = "todo/1";
     Backbone.history.start();
-    expect(this.routeSpy).toHaveBeenCalled();
+    expect(this.routeSpy).toHaveBeenCalledOnce();
+    expect(this.routeSpy).toHaveBeenCalledWith("1");
     controller.unbind("route:todo");
   });
 
