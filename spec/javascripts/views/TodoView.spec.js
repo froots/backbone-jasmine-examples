@@ -32,7 +32,10 @@ describe("TodoView", function() {
       expect(this.view.render()).toEqual(this.view);
     });
     
-    it("produces the correct HTML", function() {
+    // The following is a brittle test. It's best to
+    // test for specific nodes and attributes using
+    // the jasmine-jquery plugin matchers
+    xit("produces the correct HTML", function() {
       this.view.render();
       expect(this.view.el.innerHTML).toEqual('<a href="#todo/1"><h2>My Todo</h2></a>');
     });
@@ -51,6 +54,11 @@ describe("TodoView", function() {
         expect($(this.view.el).find('h2')).toHaveText('My Todo');
       });
       
+      it("has the correct input field value", function() {
+        expect($(this.view.el).find('input.edit')).toHaveValue('My Todo');
+        expect($(this.view.el).find('input.edit')).not.toBeVisible();
+      });
+      
     });
     
     describe("When todo is done", function() {
@@ -62,6 +70,25 @@ describe("TodoView", function() {
       
       it("has a done class", function() {
         expect($(this.view.el).find('a')).toHaveClass("done");
+      });
+      
+    });
+    
+  });
+  
+  describe("Edit state", function() {
+    
+    describe("When edit button handler fired", function() {
+      
+      beforeEach(function() {
+        $('ul.todos').append(this.view.render().el);
+        this.li = $('ul.todos li:first');
+        this.li.find('a.edit').trigger('click');
+      });
+      
+      it("shows the edit input field", function() {
+        expect(this.li.find('input.edit')).toBeVisible();
+        expect(this.li.find('h2')).not.toBeVisible();
       });
       
     });
