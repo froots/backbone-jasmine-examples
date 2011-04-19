@@ -19,6 +19,7 @@ src_files:
   - public/javascripts/lib/jquery-1.5.1.min.js
   - public/javascripts/lib/underscore-min.js
   - public/javascripts/lib/backbone-min.js
+  - public/javascripts/lib/handlebars.js
   - public/javascripts/models/*.js
   - public/javascripts/collections/*.js
   - public/javascripts/controllers/*.js
