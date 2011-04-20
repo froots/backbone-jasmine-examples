@@ -4,7 +4,7 @@ describe("AppController", function() {
     this.controller = new AppController();
     this.collection = new Backbone.Collection();
     this.todo = new Backbone.Model();
-    this.todosViewStub = sinon.stub(window, "TodosView")
+    this.todoListViewStub = sinon.stub(window, "TodoListView")
       .returns(new Backbone.View());
     this.todosCollectionStub = sinon.stub(window, "Todos")
       .returns(this.collection);
@@ -15,7 +15,7 @@ describe("AppController", function() {
   });
   
   afterEach(function() {
-    window.TodosView.restore();
+    window.TodoListView.restore();
     window.Todos.restore();
     window.TodoDetailView.restore();
     window.Todo.restore();
@@ -35,8 +35,8 @@ describe("AppController", function() {
       });
       
       it("creates a Todo list view", function() {
-        expect(this.todosViewStub).toHaveBeenCalledOnce();
-        expect(this.todosViewStub).toHaveBeenCalledWith({
+        expect(this.todoListViewStub).toHaveBeenCalledOnce();
+        expect(this.todoListViewStub).toHaveBeenCalledWith({
           collection: this.collection
         });
       });

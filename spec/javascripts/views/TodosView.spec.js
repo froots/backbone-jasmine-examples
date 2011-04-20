@@ -1,7 +1,7 @@
-describe("TodosView", function() {
+describe("TodoListView", function() {
   
   beforeEach(function() {
-    this.view = new TodosView();
+    this.view = new TodoListView();
   });
   
   describe("Instantiation", function() {

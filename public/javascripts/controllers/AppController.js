@@ -7,7 +7,7 @@ var AppController = Backbone.Controller.extend({
   
   index: function() {
     this.todos = new Todos();
-    this.todosView = new TodosView({
+    this.todosView = new TodoListView({
       collection: this.todos
     });
   },

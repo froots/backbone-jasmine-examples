@@ -1,4 +1,4 @@
-var TodosView = Backbone.View.extend({
+var TodoListView = Backbone.View.extend({
   tagName: "ul",
   className: "todos",
   
