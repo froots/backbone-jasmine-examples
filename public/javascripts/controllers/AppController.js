@@ -10,6 +10,7 @@ var AppController = Backbone.Controller.extend({
     this.todosView = new TodoListView({
       collection: this.todos
     });
+    this.todos.fetch();
   },
   
   todo: function(id) {

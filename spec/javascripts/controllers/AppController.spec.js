@@ -3,6 +3,8 @@ describe("AppController", function() {
   beforeEach(function() {
     this.controller = new AppController();
     this.collection = new Backbone.Collection();
+    this.fetchStub = sinon.stub(this.collection, "fetch")
+      .returns(null);
     this.todo = new Backbone.Model();
     this.todoListViewStub = sinon.stub(window, "TodoListView")
       .returns(new Backbone.View());
@@ -39,6 +41,11 @@ describe("AppController", function() {
         expect(this.todoListViewStub).toHaveBeenCalledWith({
           collection: this.collection
         });
+      });
+      
+      it("fetches the Todo list from the server", function() {
+        expect(this.fetchStub).toHaveBeenCalledOnce();
+        expect(this.fetchStub).toHaveBeenCalledWith();
       });
       
     });
