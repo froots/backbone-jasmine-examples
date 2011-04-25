@@ -69,7 +69,7 @@ describe("TodoView", function() {
       });
       
       it("has a done class", function() {
-        expect($(this.view.el).find('a')).toHaveClass("done");
+        expect($(this.view.el).find('a:first-child')).toHaveClass("done");
       });
       
     });
@@ -78,12 +78,36 @@ describe("TodoView", function() {
   
   describe("Edit state", function() {
     
-    describe("When edit button handler fired", function() {
+    xdescribe("When edit button handler fired - Jasmine async", function() {
       
       beforeEach(function() {
         $('ul.todos').append(this.view.render().el);
         this.li = $('ul.todos li:first');
         this.li.find('a.edit').trigger('click');
+      });
+      
+      it("shows the edit input field", function() {
+        waits(510);
+        runs(function() {
+          expect(this.li.find('input.edit')).toBeVisible();
+          expect(this.li.find('h2')).not.toBeVisible();          
+        })
+      });
+      
+    });
+    
+    describe("When edit button handler fired - sinon timers", function() {
+      
+      beforeEach(function() {
+        this.clock = sinon.useFakeTimers();
+        $('ul.todos').append(this.view.render().el);
+        this.li = $('ul.todos li:first');
+        this.li.find('a.edit').trigger('click');
+        this.clock.tick(600);
+      });
+      
+      afterEach(function() {
+        this.clock.restore();
       });
       
       it("shows the edit input field", function() {

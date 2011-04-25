@@ -17,8 +17,8 @@ var TodoView = Backbone.View.extend({
   },
   
   edit: function() {
-    this.$('h2').hide();
-    this.$('input.edit').show();
+    this.$('h2').fadeOut(500);
+    this.$('input.edit').fadeIn(500);
   }
   
 });
