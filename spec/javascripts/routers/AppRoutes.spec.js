@@ -4,7 +4,7 @@ describe("AppRouter routes", function() {
     this.router = new AppRouter;
     this.routeSpy = sinon.spy();
     try {
-      Backbone.history.start({silent:true});
+      Backbone.history.start({silent:true, pushState:true});
     } catch(e) {}
   });
   
