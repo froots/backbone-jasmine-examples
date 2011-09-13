@@ -1,7 +1,7 @@
-describe("AppController", function() {
+describe("AppRouter", function() {
     
   beforeEach(function() {
-    this.controller = new AppController();
+    this.router = new AppRouter();
     this.collection = new Backbone.Collection();
     this.fetchStub = sinon.stub(this.collection, "fetch")
       .returns(null);
@@ -28,7 +28,7 @@ describe("AppController", function() {
     describe("when no Todo list exists", function() {
       
       beforeEach(function() {
-        this.controller.index();
+        this.router.index();
       });
       
       it("creates a Todo list collection", function() {
@@ -57,7 +57,7 @@ describe("AppController", function() {
     describe("when no detail view exists", function() {
       
       beforeEach(function() {
-        this.controller.todo("1");
+        this.router.todo("1");
       });
       
       it("creates a detailed todo view", function() {

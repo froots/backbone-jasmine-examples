@@ -1,4 +1,4 @@
-var AppController = Backbone.Controller.extend({
+var AppRouter = Backbone.Router.extend({
   
   routes: {
     "": "index",
