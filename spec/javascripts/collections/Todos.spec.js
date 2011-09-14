@@ -36,11 +36,13 @@ describe("Todos collection", function() {
     beforeEach(function() {
       this.model = new Backbone.Model({id: 5, title: "Foo"});
       this.todoStub.returns(this.model);
+      this.todos.model = Todo;
       this.todos.add({id:5, title:"Foo"});
     });
     
     it("should have 1 Todo model", function() {
       expect(this.todos.length).toEqual(1);
+      expect(this.todoStub).toHaveBeenCalled();
     });
     
     it("should find a model by id", function() {
@@ -51,11 +53,17 @@ describe("Todos collection", function() {
       expect(this.todos.at(0).get("id")).toEqual(this.model.get("id"));
     });
     
+    it("should have called the Todo constructor", function() {
+      expect(this.todoStub).toHaveBeenCalledOnce();
+      expect(this.todoStub).toHaveBeenCalledWith({id:5, title:"Foo"});
+    });
+    
   });
   
   describe("When adding models", function() {
     
     it("should order models by priority by default", function() {
+      this.todos.model = Todo;
       this.todos.add([this.todo1, this.todo2, this.todo3, this.todo4]);
       expect(this.todos.at(0)).toBe(this.todo3);
       expect(this.todos.at(1)).toBe(this.todo4);
