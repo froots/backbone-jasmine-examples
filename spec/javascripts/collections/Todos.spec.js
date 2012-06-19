@@ -64,11 +64,10 @@ describe("Todos collection", function() {
     
     it("should order models by priority by default", function() {
       this.todos.model = Todo;
-      this.todos.add([this.todo1, this.todo2, this.todo3, this.todo4]);
+      this.todos.add([this.todo1, this.todo2, this.todo3]);
       expect(this.todos.at(0)).toBe(this.todo3);
-      expect(this.todos.at(1)).toBe(this.todo4);
-      expect(this.todos.at(2)).toBe(this.todo2);
-      expect(this.todos.at(3)).toBe(this.todo1);
+      expect(this.todos.at(1)).toBe(this.todo2);
+      expect(this.todos.at(2)).toBe(this.todo1);
     });
     
   });
